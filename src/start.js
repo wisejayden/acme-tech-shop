@@ -2,12 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(
-    <HelloWorld />,
+    <Welcome />,
     document.querySelector('main')
 );
 
-function HelloWorld() {
-    return (
-        <div>Hello, World!</div>
-    );
+
+export class Welcome extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <div>Hello?</div>
+        );
+    }
 }
