@@ -1,0 +1,47 @@
+header {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  margin-top: 60px;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  margin: 0;
+  height: 10%;
+  background-color: #b5e8d5;
+  /* background-image: url("/images/brightred.jpg"); */
+
+  position: relative;
+}
+.intro {
+}
+
+h1 {
+  font-weight: normal;
+  color: white;
+  border: solid 1px black;
+  display: inline-block;
+  background-color: black;
+  padding: 5px;
+}
+
+
+:focus {
+    outline-width: 0;
+}
+
+
+button {
+
+
+    padding: 12px 24px;
+    border: none;
+    font-size: 1.6em;
+    font-family: "simplifica";
+    color: white;
+    background: none;
+
+
+    cursor: pointer;
+}

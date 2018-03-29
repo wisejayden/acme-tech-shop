@@ -3,6 +3,8 @@ const app = express();
 const compression = require('compression');
 
 app.use(compression());
+app.use(express.static(__dirname + '/public'));
+
 
 if (process.env.NODE_ENV != 'production') {
     app.use(
