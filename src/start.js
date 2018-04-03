@@ -4,24 +4,32 @@ import { Link, BrowserRouter, Route } from 'react-router-dom';
 import {Catalog} from './catalog';
 import {Cart} from './cart';
 import axios from './axios';
+import {ItemModal} from './itemmodal';
 
 export class App extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
-            currentCatalog: ''
+            itemModalVisible: false
         };
-        this.catalogClick = this.catalogClick.bind(this);
+        this.itemClick = this.itemClick.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.stopPropagation = this.stopPropagation.bind(this);
     }
-    catalogClick() {
-        console.log("Hello!");
-        axios.get('http://challenge.monoqi.net/catalog')
-            .then((res) => {
-                console.log("successful axios", res.data.articles);
-                this.setState({
-                    currentCatalog: res.data.articles
-                })
-            })
+    itemClick(item) {
+        console.log(item.target.name);
+        this.setState({
+            itemModalVisible: true
+        })
+    }
+    closeModal(e) {
+        console.log("Close modal!", e.target);
+        this.setState({
+            itemModalVisible: false
+        })
+    }
+    stopPropagation(e) {
+        e.stopPropagation(e);
     }
 
     render() {
@@ -45,7 +53,7 @@ export class App extends React.Component {
                     exact path="/catalog"
                     component={() => (
                         <Catalog
-                            currentCatalog = {this.currentCatalog}
+                            itemClick = {this.itemClick}
                         />
                     )}
                 />
@@ -54,7 +62,24 @@ export class App extends React.Component {
                     exact path="/cart"
                     component={Cart}
                 />
+
+                {this.state.itemModalVisible &&
+                    <div className="modal-behind">
+                        <div onClick = {this.stopPropagation} className="modal-window">
+                            <button onClick={this.closeModal} id="closemenu" onClick={this.closeLargerModal}>X</button>
+
+                            <Route
+                                exact path="/item/:sku"
+                                component={ItemModal}
+                            />
+                        </div>
+                    </div>
+                }
+
+
             </div>
+
+
 
 
         </BrowserRouter>
