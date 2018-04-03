@@ -4,7 +4,13 @@ import axios from './axios';
 export class Item extends React.Component {
     constructor(props) {
         super(props);
-        this.state= {};
+        this.state= {
+            numberOfItemsToAdd: 1
+        };
+        this.addOne = this.addOne.bind(this);
+        this.minusOne = this.minusOne.bind(this);
+        this.addToCart = this.addToCart.bind(this);
+
     }
     componentDidMount() {
         axios.get(' http://challenge.monoqi.net/article/' + this.props.match.params.sku)
@@ -17,6 +23,26 @@ export class Item extends React.Component {
                 })
                 console.log(this.state.item.description);
             })
+    }
+    minusOne() {
+        console.log("minus one!");
+        if(this.state.numberOfItemsToAdd > 1) {
+            let newNumber = this.state.numberOfItemsToAdd - 1;
+            this.setState({
+                numberOfItemsToAdd: newNumber
+            })
+        }
+    }
+    addOne() {
+        console.log("Add one!");
+        let newNumber = this.state.numberOfItemsToAdd + 1;
+        this.setState({
+            numberOfItemsToAdd: newNumber
+        })
+    }
+    addToCart() {
+        let numberAdded = Number(this.refs.numberOfItems.value);
+        this.props.updateCart(numberAdded);
     }
     render() {
         return(
@@ -31,10 +57,10 @@ export class Item extends React.Component {
                             {this.state.item.description}
                         </div>
                         <div className="item-add">
-                            <button name="minus">-</button>
-                            <input placeholder="1"></input>
-                            <button name="plus">+</button>
-                            <button className="add-cart-button"type="button">Add To Cart</button>
+                            <button onClick={this.minusOne} name="minus">-</button>
+                            <input type="text" value={this.state.numberOfItemsToAdd} ref="numberOfItems"/>
+                            <button onClick={this.addOne} name="plus">+</button>
+                            <button onClick={this.addToCart} className="add-cart-button"type="button">Add To Cart</button>
                         </div>
                     </div>
                 }

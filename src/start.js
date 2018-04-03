@@ -10,11 +10,20 @@ export class App extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
+            cartItemsNumber: 0
         };
         this.itemClick = this.itemClick.bind(this);
+        this.updateCart = this.updateCart.bind(this);
     }
     itemClick(item) {
         console.log(item.target.name);
+    }
+    updateCart(numberAdded) {
+        let currentNumber = Number(this.state.cartItemsNumber);
+        let newCartNumber = currentNumber + numberAdded;
+        this.setState({
+            cartItemsNumber: newCartNumber
+        })
     }
 
     render() {
@@ -27,7 +36,7 @@ export class App extends React.Component {
                         <Link to="/"><h1>ACME Tech Shop</h1></Link>
                         <div className="links">
                             <Link to="/catalog"><button className="catalog-button" type="button" onClick={this.catalogClick}>Catalog</button></Link>
-                            <Link to="/cart"><button className="cart-button" type="button">View Cart</button></Link>
+                            <Link to="/cart"><button className="cart-button" type="button">View Cart ({this.state.cartItemsNumber})</button></Link>
                         </div>
                     </div>
 
@@ -51,8 +60,16 @@ export class App extends React.Component {
 
                 <Route
                     exact path="/item/:sku"
-                    component={Item}
+                    component={(props) => (
+                        <Item
+                            match = {props.match}
+                            history = {props.history}
+                            updateCart = {this.updateCart}
+                        />
+                    )}
                 />
+
+
 
 
             </div>
