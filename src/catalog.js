@@ -16,10 +16,10 @@ export class Catalog extends React.Component {
                 let allArticles = [];
                 console.log("Successful axios", articles[0]);
                 for (var i = 0; i < articles.length; i++) {
+                    var sku = articles[i].sku;
                     allArticles.push(
                             <div key={i} className="catalog-item-container">
-                                <Link to="/item/199203
-                                "><img onClick={this.props.itemClick} name={articles[i].sku} className= "catalog-item-picture" src={articles[i].image} /></Link>
+                                <Link to={"/item/" + articles[i].sku}><img onClick={this.props.itemClick} name={articles[i].sku} className= "catalog-item-picture" src={articles[i].image} /></Link>
                                 <h2>{articles[i].name}</h2>
                                 <p>{articles[i].price.amount} {articles[i].price.currency}</p>
                             </div>
