@@ -15,17 +15,14 @@ export class Item extends React.Component {
     componentDidMount() {
         axios.get(' http://challenge.monoqi.net/article/' + this.props.match.params.sku)
             .then((res) => {
-                console.log("Successful sku GET", res.data);
                 let item = res.data
                 item.description = item.description.replace(/<(?:.|\n)*?>/gm, '');
                 this.setState({
                     item
                 })
-                console.log(this.state.item.description);
             })
     }
     minusOne() {
-        console.log("minus one!");
         if(this.state.numberOfItemsToAdd > 1) {
             let newNumber = this.state.numberOfItemsToAdd - 1;
             this.setState({
@@ -34,7 +31,6 @@ export class Item extends React.Component {
         }
     }
     addOne() {
-        console.log("Add one!");
         let newNumber = this.state.numberOfItemsToAdd + 1;
         this.setState({
             numberOfItemsToAdd: newNumber
@@ -42,7 +38,11 @@ export class Item extends React.Component {
     }
     addToCart() {
         let numberAdded = Number(this.refs.numberOfItems.value);
-        this.props.updateCart(numberAdded);
+        let addItem = {
+            'sku': this.props.match.params.sku,
+            'quantity': numberAdded
+        }
+        this.props.updateCart(addItem);
     }
     render() {
         return(

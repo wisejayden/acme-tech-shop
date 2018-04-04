@@ -16,15 +16,55 @@ export class App extends React.Component {
         this.updateCart = this.updateCart.bind(this);
     }
     itemClick(item) {
-        console.log(item.target.name);
+        // console.log(item.target.name);
     }
-    updateCart(numberAdded) {
-        let currentNumber = Number(this.state.cartItemsNumber);
-        let newCartNumber = currentNumber + numberAdded;
+
+    updateCart(newItem) {
+        // let currentNumber = Number(this.state.cartItemsNumber);
+        // let newCartNumber = currentNumber + numberAdded;
+        let cart = this.state.cart;
+        // for (var prop in newItem) {
+        //     console.log("for in prop", prop);
+        // }
+
+        cart.lines.push(newItem);
         this.setState({
-            cartItemsNumber: newCartNumber
+            cart
         })
+        axios.put('http://challenge.monoqi.net/cart', cart)
+            .then((res) => {
+                console.log("put request", res.data);
+                this.setState({
+                    cartTotals: res.data
+                })
+                console.log("updated cart", this.state.cart);
+                console.log("updated cartValues", this.state.cartTotals);
+
+            })
+            .catch((err) => {
+                console.log("Put request error");
+            })
+
+
+
+
+
+
+
     }
+
+    componentDidMount(){
+        //Receive an empty cart on mount
+        axios.get('http://challenge.monoqi.net/cart')
+            .then((res) => {
+                let cart = res.data;
+                this.setState({
+                    cart
+                })
+            })
+    }
+
+
 
     render() {
         return (
