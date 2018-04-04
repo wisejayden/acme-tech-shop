@@ -10,15 +10,26 @@ export class App extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
-            cartItemsNumber: 0
+            cartItemsNumber: 0,
+            cartTotals: {}
         };
         this.itemClick = this.itemClick.bind(this);
         this.updateCart = this.updateCart.bind(this);
+        this.updateCartNumber = this.updateCartNumber.bind(this);
     }
     itemClick(item) {
         // console.log(item.target.name);
     }
-
+    updateCartNumber(totalCart) {
+        let count = 0;
+        for (var i = 0; i < totalCart.lines.length; i++) {
+            count += totalCart.lines[i].quantity;
+            console.log("totalcartitems function", totalCart.lines[i].quantity);
+        }
+        this.setState({
+            cartItemsNumber: count
+        })
+    }
     updateCart(newItem) {
         // let currentNumber = Number(this.state.cartItemsNumber);
         // let newCartNumber = currentNumber + numberAdded;
@@ -28,6 +39,7 @@ export class App extends React.Component {
         // }
 
         cart.lines.push(newItem);
+        this.updateCartNumber(cart);
         this.setState({
             cart
         })
@@ -94,7 +106,11 @@ export class App extends React.Component {
 
                 <Route
                     exact path="/cart"
-                    component={Cart}
+                    component={() => (
+                        <Cart
+                            cartTotals = {this.state.cartTotals}
+                        />
+                    )}
                 />
 
 

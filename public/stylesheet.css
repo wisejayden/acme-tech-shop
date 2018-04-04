@@ -72,3 +72,29 @@ button {
 .add-cart-button {
     color: black;
 }
+.cart-items {
+    display: flex;
+    /* flex-flow: row wrap; */
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: space-around;
+    padding-top: 100px;
+    width: 50%;
+}
+.cart-item-container {
+    background-color: white;
+    width: 30%;
+    border: 1px solid rgb(193, 186, 187);
+    padding: 10px 10px 30px 10px;
+    margin: 20px 0px 20px 0px;
+    text-align: center;
+}
+.cart-item-picture {
+    max-width: 80%;
+}
+.total {
+    display: absolute;
+    left: 50%;
+}
