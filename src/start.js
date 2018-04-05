@@ -88,12 +88,16 @@ export class App extends React.Component {
                         <Link to="/"><h1>ACME Tech Shop</h1></Link>
                         <div className="links">
                             <Link to="/catalog"><button className="catalog-button" type="button" onClick={this.catalogClick}>Catalog</button></Link>
-                            <Link to="/cart"><button className="cart-button" type="button">View Cart ({this.state.cartItemsNumber})</button></Link>
+
+                            <Link to="/cart"><div className="cart-button">
+                                <img alt="shopping-cart" className="shopping-cart-image" src="./images/shopping-cart.svg" />
+                                <p id="">({this.state.cartItemsNumber})</p>
+                            </div></Link>
+
                         </div>
                     </div>
 
                 </header>
-                <h2>Welcome to the Shop!</h2>
 
                 <Route
                     exact path="/catalog"
@@ -109,6 +113,7 @@ export class App extends React.Component {
                     component={() => (
                         <Cart
                             cartTotals = {this.state.cartTotals}
+                            cartItemsNumber = {this.state.cartItemsNumber}
                         />
                     )}
                 />

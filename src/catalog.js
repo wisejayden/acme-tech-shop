@@ -20,7 +20,7 @@ export class Catalog extends React.Component {
                     allArticles.push(
                             <div key={i} className="catalog-item-container">
                                 <Link to={"/item/" + articles[i].sku}><img onClick={this.props.itemClick} name={articles[i].sku} className= "catalog-item-picture" src={articles[i].image} /></Link>
-                                <h2>{articles[i].name}</h2>
+                                <Link to={"/item/" + articles[i].sku}><h2>{articles[i].name}</h2></Link>
                                 <p>{articles[i].price.amount} {articles[i].price.currency}</p>
                             </div>
                     )

@@ -49,19 +49,22 @@ export class Item extends React.Component {
             <div>
 
                 {this.state.item &&
-                    <div>
+                    <div className = "item">
                         <div className="item-container">
                             <img src={this.state.item.image} className="item-image"/>
-                            <h2>{this.state.item.name}</h2>
-                            <p>{this.state.item.price.amount} {this.state.item.price.currency}</p>
-                            {this.state.item.description}
+                            <div className="item-add">
+                                <button onClick={this.minusOne} name="minus">-</button>
+                                <input id="item-quantity" type="text" value={this.state.numberOfItemsToAdd} ref="numberOfItems"/>
+                                <button onClick={this.addOne} name="plus">+</button>
+                                <button onClick={this.addToCart} className="add-cart-button"type="button">Add To Cart</button>
+                            </div>
                         </div>
-                        <div className="item-add">
-                            <button onClick={this.minusOne} name="minus">-</button>
-                            <input type="text" value={this.state.numberOfItemsToAdd} ref="numberOfItems"/>
-                            <button onClick={this.addOne} name="plus">+</button>
-                            <button onClick={this.addToCart} className="add-cart-button"type="button">Add To Cart</button>
-                        </div>
+                            <div id="item-description">
+                                <h2>{this.state.item.name}</h2>
+                                <p>{this.state.item.price.amount} {this.state.item.price.currency}</p>
+                                <p>{this.state.item.description}</p>
+                            </div>
+
                     </div>
                 }
             </div>
