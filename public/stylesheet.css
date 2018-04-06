@@ -69,6 +69,17 @@ button {
 }
                         /* HEADING*/
 
+.title-container {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    max-width: 30vw;
+}
+#title-subtitle {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+}
 .links {
     position: relative;
 }
@@ -79,10 +90,10 @@ button {
     right: 10px;
     top: -100px;
 }
-.shopping-cart-image:hover {
+/* .shopping-cart-image:hover {
     fill: blue;
     width: 300px;
-}
+} */
 
 
 

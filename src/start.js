@@ -11,7 +11,8 @@ export class App extends React.Component {
         super(props);
         this.state= {
             cartItemsNumber: 0,
-            cartTotals: {}
+            cartTotals: {},
+            title: '/images/acme.png'
         };
         this.updateCart = this.updateCart.bind(this);
         this.updateCartNumber = this.updateCartNumber.bind(this);
@@ -60,7 +61,11 @@ export class App extends React.Component {
             <div>
                 <header className="intro">
                     <div className="intro-content">
-                        <Link to="/"><h1>ACME Tech Shop</h1></Link>
+                        <div className="title-container">
+                            <Link to="/"><img className="title" src={this.state.title} /></Link>
+                            <h2 id="title-subtitle">Tech Shop</h2>
+                        </div>
+
                         <div className="links">
                             <Link to="/catalog"><button className="catalog-button" type="button" onClick={this.catalogClick}>Catalog</button></Link>
                             <Link to="/cart"><div className="cart-button">
