@@ -13,6 +13,7 @@ export class Item extends React.Component {
 
     }
     componentDidMount() {
+        //Make an API request for item details by SKU
         axios.get(' http://challenge.monoqi.net/article/' + this.props.match.params.sku)
             .then((res) => {
                 let item = res.data
@@ -37,6 +38,7 @@ export class Item extends React.Component {
         })
     }
     addToCart() {
+        //Create object to update cart details
         let numberAdded = Number(this.refs.numberOfItems.value);
         let addItem = {
             'sku': this.props.match.params.sku,
@@ -47,7 +49,6 @@ export class Item extends React.Component {
     render() {
         return(
             <div>
-
                 {this.state.item &&
                     <div className = "item">
                         <div className="item-container">

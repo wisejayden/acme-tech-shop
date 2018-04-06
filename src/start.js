@@ -13,14 +13,11 @@ export class App extends React.Component {
             cartItemsNumber: 0,
             cartTotals: {}
         };
-        this.itemClick = this.itemClick.bind(this);
         this.updateCart = this.updateCart.bind(this);
         this.updateCartNumber = this.updateCartNumber.bind(this);
     }
-    itemClick(item) {
-        // console.log(item.target.name);
-    }
     updateCartNumber(totalCart) {
+        //Loop through returned total, adding every quantity to calculate total number of items in cart
         let count = 0;
         for (var i = 0; i < totalCart.lines.length; i++) {
             count += totalCart.lines[i].quantity;
@@ -30,13 +27,8 @@ export class App extends React.Component {
         })
     }
     updateCart(newItem) {
-        // let currentNumber = Number(this.state.cartItemsNumber);
-        // let newCartNumber = currentNumber + numberAdded;
+        //When updating cart, send a request for a new quote
         let cart = this.state.cart;
-        // for (var prop in newItem) {
-        //     console.log("for in prop", prop);
-        // }
-
         cart.lines.push(newItem);
         this.updateCartNumber(cart);
         this.setState({
@@ -47,20 +39,11 @@ export class App extends React.Component {
                 this.setState({
                     cartTotals: res.data
                 })
-
             })
             .catch((err) => {
                 console.log("Put request error");
             })
-
-
-
-
-
-
-
     }
-
     componentDidMount(){
         //Receive an empty cart on mount
         axios.get('http://challenge.monoqi.net/cart')
@@ -71,20 +54,15 @@ export class App extends React.Component {
                 })
             })
     }
-
-
-
     render() {
         return (
             <BrowserRouter>
             <div>
                 <header className="intro">
-
                     <div className="intro-content">
                         <Link to="/"><h1>ACME Tech Shop</h1></Link>
                         <div className="links">
                             <Link to="/catalog"><button className="catalog-button" type="button" onClick={this.catalogClick}>Catalog</button></Link>
-
                             <Link to="/cart"><div className="cart-button">
                                 <img alt="shopping-cart" className="shopping-cart-image" src="./images/shopping-cart.svg" />
                                 <p id="">({this.state.cartItemsNumber})</p>
@@ -92,18 +70,14 @@ export class App extends React.Component {
 
                         </div>
                     </div>
-
                 </header>
-
                 <Route
                     exact path="/catalog"
                     component={() => (
                         <Catalog
-                            itemClick = {this.itemClick}
                         />
                     )}
                 />
-
                 <Route
                     exact path="/cart"
                     component={() => (
@@ -113,8 +87,6 @@ export class App extends React.Component {
                         />
                     )}
                 />
-
-
                 <Route
                     exact path="/item/:sku"
                     component={(props) => (
@@ -125,19 +97,8 @@ export class App extends React.Component {
                         />
                     )}
                 />
-
-
-
-
             </div>
-
-
-
-
         </BrowserRouter>
-
-
-
         );
     }
 }
