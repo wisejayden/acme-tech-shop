@@ -17,18 +17,12 @@ export class Cart extends React.Component {
             cart
         });
         let allCartItems = [];
-        console.log("STATE CART", this.state.cart);
         if(cart.lines) {
-            console.log("TOTAL", cart);
-            console.log("AMOUNT?", this.props.cartTotals.total.amount);
-
-
             let allAxiosCalls = new Promise((resolve, reject) => {
                 for (let i = 0; i < cart.lines.length; i++) {
                     var p = i;
                     axios.get(' http://challenge.monoqi.net/article/' + cart.lines[i].sku)
                         .then((res) => {
-                            console.log("Log the quantity", cart.lines[p]);
 
                             allCartItems.push(
                                 <div key={i} className="cart-item-container">
@@ -50,11 +44,9 @@ export class Cart extends React.Component {
                 resolve();
             })
             allAxiosCalls.then(() => {
-                console.log("LETS SEE THE OBJECT", allCartItems);
                 this.setState({
                     allCartItems
                 })
-                console.log("LOG STATE", this.state.allCartItems);
             })
         }
 

@@ -24,7 +24,6 @@ export class App extends React.Component {
         let count = 0;
         for (var i = 0; i < totalCart.lines.length; i++) {
             count += totalCart.lines[i].quantity;
-            console.log("totalcartitems function", totalCart.lines[i].quantity);
         }
         this.setState({
             cartItemsNumber: count
@@ -45,12 +44,9 @@ export class App extends React.Component {
         })
         axios.put('http://challenge.monoqi.net/cart', cart)
             .then((res) => {
-                console.log("put request", res.data);
                 this.setState({
                     cartTotals: res.data
                 })
-                console.log("updated cart", this.state.cart);
-                console.log("updated cartValues", this.state.cartTotals);
 
             })
             .catch((err) => {

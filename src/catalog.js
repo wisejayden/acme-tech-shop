@@ -14,7 +14,6 @@ export class Catalog extends React.Component {
             .then((res) => {
                 var articles = res.data.articles;
                 let allArticles = [];
-                console.log("Successful axios", articles[0]);
                 for (var i = 0; i < articles.length; i++) {
                     var sku = articles[i].sku;
                     allArticles.push(
@@ -28,14 +27,12 @@ export class Catalog extends React.Component {
                 this.setState({
                     allArticles
                 })
-                    console.log("this state", this.state.allArticles);
             })
     }
     // articleClick(e) {
     //     console.log(e.target.name);
     // }
     render() {
-        console.log(this.state.allArticles);
         return(
             <div className="catalog">
                 {this.state.allArticles}
