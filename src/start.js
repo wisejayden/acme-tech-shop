@@ -6,6 +6,8 @@ import {Cart} from './cart';
 import axios from './axios';
 import {Item} from './item';
 import {Home} from './home';
+import Top100 from './top100';
+import Trending from './trending';
 
 export class App extends React.Component {
     constructor(props) {
@@ -74,12 +76,13 @@ export class App extends React.Component {
 
                         <div className="links">
                             <Link to="/catalog"><button className="catalog-button" type="button" onClick={this.catalogClick}>Catalog</button></Link>
+                            <Link to="/trending"><button className="catalog-button" type="button" onClick={this.catalogClick}>Trending</button></Link>
+                            <Link to="/top100"><button className="catalog-button" type="button" onClick={this.catalogClick}>Top 100</button></Link>
 
                         </div>
                     </div>
                 </header>
-                <footer>   
-                </footer>
+
                 <Route
                     exact path="/"
                     component={() => (
@@ -113,6 +116,35 @@ export class App extends React.Component {
                         />
                     )}
                 />
+                <Route
+                    exact path="/top100"
+                    component={Top100}
+                />
+                <Route
+                    exact path="/trending"
+                    component={Trending}
+                />
+                <footer>
+                    <ul>
+                        <li>FIND A STORE</li>
+                        <li>SIGN UP FOR EMAIL</li>
+                        <li>BECOME A MEMBER</li>
+
+
+                    </ul>
+                    <ul>
+                    <li>ABOUT US</li>
+                    <li>CAREERS</li>
+                    <li>PRESS</li>
+                    </ul>
+                    <div className="social">
+                        <ul className="social-list">
+                            <li><img className="social-images" src="/images/twitter.png" alt="twitter" /></li>
+                            <li><img className="social-images" src="/images/facebook.png" alt="facebook" /></li>
+                            <li><img className="social-images" src='/images/instagram.png' /></li>
+                        </ul>
+                    </div>
+                </footer>
             </div>
 
         </BrowserRouter>

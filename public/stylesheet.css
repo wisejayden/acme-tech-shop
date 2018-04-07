@@ -11,12 +11,82 @@
 #a8ddd4
 #eebaba */
 
+@font-face {
+    font-family: 'audrey';
+    src: url('/fonts/audrey-bold-webfont.woff2') format('woff2'),
+        url('/fonts/audrey-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'coco';
+    src: url('/fonts/coco-bold-webfont.woff2') format('woff2'),
+        url('/fonts/coco-bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'elianto';
+    src: url('/fonts/elianto-regular-webfont.woff2') format('woff2'),
+        url('/fonts/elianto-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'simplifica';
+    src: url('/fonts/simplifica_typeface-webfont.woff2') format('woff2'),
+        url('/fonts/simplifica_typeface-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'skinny';
+    src: url('/fonts/skinny-regular-webfont.woff2') format('woff2'),
+        url('/fonts/skinny-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'pops';
+    src: url('/fonts/pops_08_regular-webfont.woff2') format('woff2'),
+        url('/fonts/pops_08_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'whatever';
+    src: url('/fonts/whatever_it_takes-webfont.woff2') format('woff2'),
+        url('/fonts/whatever_it_takes-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 
 
 html, body {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     background-color: #f7f7f7;
     margin: 0;
+}
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+
 }
 
 a {
@@ -32,6 +102,8 @@ h1 {
   background-color: black;
   padding: 5px;
 }
+
+
 
 
 :focus {
@@ -73,6 +145,7 @@ header {
   position: fixed;
   box-shadow: 2px 1px 10px #e5e5e5;
   z-index: 20;
+  top: 0;
 }
 .title-container {
     position: relative;
@@ -88,6 +161,13 @@ header {
 .links {
     position: relative;
     border-top: 1px solid #e5e5e5;
+    font-size: 1em;
+}
+.catalog-button {
+    font-family: 'audrey';
+}
+.catalog-button:hover {
+    text-decoration: underline;
 }
 .cart-button {
     display: flex;
@@ -108,7 +188,7 @@ header {
     overflow: hidden;
     /* border-bottom: solid black 1px; */
 
-    margin-top: 30px;
+    margin-top: 105px;
     margin-left: 0;
     margin-right: 0;
     width: 100%;
@@ -123,9 +203,42 @@ header {
     object-fit: cover;
 }
 
+.home-content {
+    height: 300px;
+    background-color: #f7f7f7;
+
+}
+.splash-button {
+    position: absolute;
+    left: 50%;
+    top: 260px;
+    transform: translate(-50%);
+
+    padding: 12px 24px;
+
+    font-size: 1em;
+    text-align: center ;
+    vertical-align: center;
+    color: white;
+    border: 1px solid white;
+    background: none;
+    letter-spacing: 2px;
+
+
+    cursor: pointer;
+
+}
+.splash-button:hover {
+  outline   : none;
+  background:#FFF;
+  color   :  rgba(0, 0, 0, 1);
+
+}
+
 
                          /* CATALOG STYLING*/
 .catalog {
+    margin-top: 105px;
     display: flex;
     /* flex-flow: row wrap; */
     flex-direction: row;
@@ -217,7 +330,31 @@ header {
                         /* CART STYLING*/
 
 .cart {
-    display: flex;
+    margin-top: 105px;
+    width: 100%;
+}
+.arrow-left {
+    width: 0;
+ height: 0;
+ border-top: 10px solid transparent;
+ border-bottom: 10px solid transparent;
+
+ border-right:10px solid black;
+ display: inline-block;
+ margin-left: 20px;
+ margin-top: 5px;
+
+}
+
+#continue-shopping {
+    text-decoration: underline;
+    display: inline-block;
+    margin-left: 5px;
+
+}
+
+#continue-shopping:hover {
+    color: #fa5402;
 }
 .cart-items {
     display: inline-block;
@@ -227,8 +364,19 @@ header {
     justify-content: space-around;
     align-items: center;
     align-content: space-around;
-    padding-top: 100px;
     width: 50%;
+    margin-left: 2vw;
+    top: 0;
+    height: 100%;
+    vertical-align: top;
+
+}
+.cart-main {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin-top: 0;
+
 }
 .cart-item-container {
     display: -webkit-box;
@@ -247,6 +395,7 @@ header {
     display: flex;
 
 }
+
 .cart-item-picture {
     max-width: 40%;
     margin-left: -10vw;
@@ -254,10 +403,22 @@ header {
 .cart-summary {
     display: inline-block;
     /* left: 50%; */
-    border: solid 1px black;
     height: 50vh;
     width: 30vw;
-    margin-top: 100px;
+    background-color: black;
+    color: #efefef;
+    margin-bottom: 20px;
+    text-align: center;
+
+
+}
+.cart-total {
+    text-align: center;
+    /* width: 100%; */
+    margin-top: 15vh;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    border-top: solid 1px #373737;
 }
 #cart-title {
     border: solid 1px #eee;
@@ -267,8 +428,28 @@ header {
     text-align: center;
     vertical-align: center;
 }
+.checkout-button-container {
+    border-top: solid 1px #373737;
+
+}
+.checkout-button {
+    background-color: #fa5402;
+    color: white;
+    width: 80%;
+    position: relative;
+    font-size: 1em;
+    margin-top: 10%;
+}
+.checkout-button:hover {
+    background-color: #f99b6c;
+
+}
 
                             /* PRODUCT PAGE STYLING*/
+.item-page {
+    margin-top: 105px;
+    margin-left: 10px;
+}
 .item {
     display: flex;
     flex-flow: wrap;
@@ -296,3 +477,63 @@ header {
 }
 
                 /* FOOTER*/
+
+
+footer {
+    display: block;
+    left: 0;
+     bottom: 0;
+     width: 100%;
+     height: 100px;
+     background-color: black;
+     color: #949494;
+}
+ul {
+    display: inline-block;
+    list-style-type: none;
+}
+li {
+    cursor: pointer;
+    /* width: 20vw; */
+    font-size: .7em;
+}
+li:hover {
+    color: white;
+}
+.social {
+    display: inline-block;
+    position: absolute;
+    right: 20%;
+}
+.social-list > li {
+    display: inline-block;
+    margin-right: 10px;
+
+}
+.social-images {
+    width: 25px;
+}
+
+
+                    /* DUMMY PAGES*/
+.dummy-page {
+    margin-top: 110px;
+    height: 500px;
+    position:relative;
+}
+.coming-soon {
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%);
+
+}
+                    /* MEDIA QUERIES*/
+
+@media screen and (max-width: 600) {
+    body {
+        background-color: blue;
+    }
+    .links {
+        font-size: 0.5em;
+    }
+}

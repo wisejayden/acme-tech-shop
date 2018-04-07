@@ -48,7 +48,7 @@ export class Item extends React.Component {
     }
     render() {
         return(
-            <div>
+            <div className="item-page">
                 {this.state.item &&
                     <div className = "item">
                         <div className="item-container">

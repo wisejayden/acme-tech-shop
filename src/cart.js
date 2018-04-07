@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from './axios';
+import {Link} from 'react-router-dom';
 
 
 
@@ -56,24 +57,33 @@ export class Cart extends React.Component {
         let totalAmount;
         if(this.props.cartTotals.total) {
              totalAmount = (
-                 <div>Total: {this.props.cartTotals.total.amount} {this.props.cartTotals.total.currency}</div>
+                 <div className="cart-total">Total: {this.props.cartTotals.total.amount} {this.props.cartTotals.total.currency}</div>
              )
         } else {
             totalAmount = (
-                <div>Cart empty!</div>
+                <div className="cart-total">Cart empty!</div>
             )
         }
         return (
-            <div>
-
-                <div className="cart-items">
-                <h3 id="cart-title">YOUR CART({this.props.cartItemsNumber})</h3>
-                    {this.state.allCartItems}
+            <div className="cart">
+                <div className="cart-header">
+                    <div className="arrow-left"></div>
+                    <Link to="/catalog"><p id="continue-shopping">Continue Shopping</p></Link>
                 </div>
-                <div className="cart-summary">
-                    <h2>SUMMARY</h2>
-                    {totalAmount}
-                    <button className="checkout-button">Checkout</button>
+                <div className="cart-main">
+                    <div id="white-space">
+                    </div>
+                    <div className="cart-items">
+                        <h3 id="cart-title">YOUR CART({this.props.cartItemsNumber})</h3>
+                        {this.state.allCartItems}
+                    </div>
+                    <div className="cart-summary">
+                        <h2>SUMMARY</h2>
+                        {totalAmount}
+                        <div className="checkout-button-container">
+                            <button className="checkout-button">Checkout</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

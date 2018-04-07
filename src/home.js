@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export class Home extends React.Component {
     constructor(props) {
@@ -8,8 +9,14 @@ export class Home extends React.Component {
     }
     render() {
         return (
-            <div className="splash">
-                <img src="/images/desk-tech.jpg" className="splash-image" alt="Our Tech Splash" />
+            <div>
+                <div className="splash">
+                    <img src="/images/desk-tech.jpg" className="splash-image" alt="Our Tech Splash" />
+                    <Link to="/catalog"><button className ="splash-button"  type="button">SHOP NOW</button></Link>
+                </div>
+                <div className="home-content">
+
+                </div>
             </div>
         )
     }
