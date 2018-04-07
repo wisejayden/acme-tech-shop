@@ -5,6 +5,7 @@ import {Catalog} from './catalog';
 import {Cart} from './cart';
 import axios from './axios';
 import {Item} from './item';
+import {Home} from './home';
 
 export class App extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export class App extends React.Component {
         this.state= {
             cartItemsNumber: 0,
             cartTotals: {},
-            title: '/images/acme.png'
+            title: '/images/acme-rocket.png'
         };
         this.updateCart = this.updateCart.bind(this);
         this.updateCartNumber = this.updateCartNumber.bind(this);
@@ -59,23 +60,33 @@ export class App extends React.Component {
         return (
             <BrowserRouter>
             <div>
-                <header className="intro">
+                <header>
                     <div className="intro-content">
                         <div className="title-container">
                             <Link to="/"><img className="title" src={this.state.title} /></Link>
-                            <h2 id="title-subtitle">Tech Shop</h2>
+
+
                         </div>
+                        <Link to="/cart"><div className="cart-button">
+                            <img alt="shopping-cart" className="shopping-cart-image" src="./images/shopping-cart.svg" />
+                            <p id="">({this.state.cartItemsNumber})</p>
+                        </div></Link>
 
                         <div className="links">
                             <Link to="/catalog"><button className="catalog-button" type="button" onClick={this.catalogClick}>Catalog</button></Link>
-                            <Link to="/cart"><div className="cart-button">
-                                <img alt="shopping-cart" className="shopping-cart-image" src="./images/shopping-cart.svg" />
-                                <p id="">({this.state.cartItemsNumber})</p>
-                            </div></Link>
 
                         </div>
                     </div>
                 </header>
+                <footer>   
+                </footer>
+                <Route
+                    exact path="/"
+                    component={() => (
+                        <Home
+                        />
+                    )}
+                />
                 <Route
                     exact path="/catalog"
                     component={() => (
@@ -103,6 +114,7 @@ export class App extends React.Component {
                     )}
                 />
             </div>
+
         </BrowserRouter>
         );
     }
