@@ -21,7 +21,7 @@ const conf = {
     entry: ['babel-polyfill', __dirname + '/src/start.js'],
     output: {
         path: __dirname,
-        filename: 'bundle.js'
+        filename: 'bundle-server.js'
     },
     plugins: plugins,
     module: {
