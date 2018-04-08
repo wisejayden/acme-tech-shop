@@ -14,13 +14,12 @@ if (process.env.NODE_ENV != 'production') {
         })
     );
 } else {
-    app.use('/bundle.js', (req, res) => res.sendFile(`${__dirname}/bundle-server.js`));
+    app.use('/bundle.js', (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
 app.get('*', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
-
 
 app.listen(process.env.PORT || 8080, function() {
     console.log("I'm listening.");
