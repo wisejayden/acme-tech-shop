@@ -14,7 +14,7 @@ if (process.env.NODE_ENV != 'production') {
         })
     );
 } else {
-    app.use('/bundle.js', (req, res) => res.sendFile(`${__dirname}/bundle.js`));
+    app.use('/bundle.js', (req, res) => res.sendFile(`${__dirname}/bundle-server.js`));
 }
 
 app.get('*', function(req, res) {
