@@ -1,39 +1,26 @@
-/* color scheme
-#420b0f
-#eb3627
-#f7724e
-#0eb3c6
-#026f7d */
-
-/* #e6debb
-#e39646
-#010040
-#a8ddd4
-#eebaba */
+@font-face {
+    font-family: 'roboto';
+    src: url('/fonts/roboto-regular-webfont.woff2') format('woff2'),
+        url('/fonts/roboto-regular-webfont.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+}
 
 @font-face {
-    font-family: 'audrey';
-    src: url('/fonts/audrey-bold-webfont.woff2') format('woff2'),
-        url('/fonts/audrey-bold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+    font-family: 'rubik';
+    src: url('/fonts/rubik-regular-webfont.woff2') format('woff2'),
+        url('/fonts/rubik-regular-webfont.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
 }
 @font-face {
-    font-family: 'coco';
-    src: url('/fonts/coco-bold-webfont.woff2') format('woff2'),
-        url('/fonts/coco-bold-webfont.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
+    font-family: 'trirong';
+    src: url('/fonts/trirong-regular-webfont.woff2') format('woff2'),
+        url('/fonts/trirong-regular-webfont.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+}
 
-}
-@font-face {
-    font-family: 'elianto';
-    src: url('/fonts/elianto-regular-webfont.woff2') format('woff2'),
-        url('/fonts/elianto-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 
 @font-face {
     font-family: 'simplifica';
@@ -43,31 +30,6 @@
     font-style: normal;
 
 }
-@font-face {
-    font-family: 'skinny';
-    src: url('/fonts/skinny-regular-webfont.woff2') format('woff2'),
-        url('/fonts/skinny-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-@font-face {
-    font-family: 'pops';
-    src: url('/fonts/pops_08_regular-webfont.woff2') format('woff2'),
-        url('/fonts/pops_08_regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-@font-face {
-    font-family: 'whatever';
-    src: url('/fonts/whatever_it_takes-webfont.woff2') format('woff2'),
-        url('/fonts/whatever_it_takes-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
 
 
 html, body {
@@ -163,10 +125,10 @@ header {
     border-top: 1px solid #e5e5e5;
     font-size: 1em;
 }
-.catalog-button {
-    font-family: 'audrey';
+.header-links {
+    font-family: 'roboto';
 }
-.catalog-button:hover {
+.header-links:hover {
     text-decoration: underline;
 }
 .cart-button {
@@ -181,6 +143,9 @@ header {
     width: 300px;
 } */
 
+#twin-discount {
+    color: red;
+}
 
                         /* HOME STYLING*/
 .splash {
@@ -332,6 +297,7 @@ header {
 .cart {
     margin-top: 105px;
     width: 100%;
+    margin-left: 30px;
 }
 .arrow-left {
     width: 0;
@@ -403,8 +369,8 @@ header {
 .cart-summary {
     display: inline-block;
     /* left: 50%; */
-    height: 50vh;
-    width: 30vw;
+    height: 430px;
+    width: 300px;
     background-color: black;
     color: #efefef;
     margin-bottom: 20px;
@@ -535,6 +501,7 @@ li:hover {
 }
 .coming-soon {
     left: 50%;
+    width: 40%;
     position: absolute;
     transform: translate(-50%);
 
@@ -554,14 +521,23 @@ li:hover {
     padding: 20px;
     background-color: white;
     text-align: center;
+    overflow: scroll;
+
 }
                     /* MEDIA QUERIES*/
 
-@media screen and (max-width: 600) {
-    body {
-        background-color: blue;
+@media screen and (max-width: 500px) {
+    .header-links {
+        font-size: 1em;
     }
-    .links {
-        font-size: 0.5em;
+    .social {
+        right: 2%;
+    }
+    .cart-items {
+        width: 80%;
+    }
+    .cart-summary {
+        display: block;
+
     }
 }

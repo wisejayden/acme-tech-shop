@@ -9,11 +9,13 @@ export class Cart extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            message: "Hello"
+            message: "Hello",
+            discount: []
         };
     }
     componentDidMount() {
         let cart = this.props.cartTotals;
+        console.log("");
         this.setState({
             cart
         });
@@ -21,6 +23,28 @@ export class Cart extends React.Component {
         if(cart.lines) {
             console.log("Cart details", cart);
 
+            let cartTotal = [];
+            for (var i = 0; i < cart.lines.length; i++) {
+                if (cart.lines[i].sku == 332119) {
+                    //Filter out discounts
+                    this.setState ({
+                        discount: "earplugs"
+                    })
+                    console.log("Log 332119 discount", cart.lines[i]);
+                    cart.lines = cart.lines.filter(function(el) {
+                        return el.sku != 332119;
+                    })
+                } else if(cart.lines[i].sku == 999999) {
+                    this.setState ({
+                        discount: "twin"
+                    })
+                    console.log("Log 999999 discount", cart.lines[i]);
+                    cart.lines = cart.lines.filter(function(el) {
+                        return el.sku != 999999;
+                    })
+                }
+            }
+            console.log("CART BEFORE AXIos", cart);
             Promise.all(
                 cart.lines.map(
                     (cart, i) => axios.get('http://challenge.monoqi.net/article/' + cart.sku)
@@ -55,6 +79,7 @@ export class Cart extends React.Component {
     }
     render() {
         let totalAmount;
+        let discount;
         if(this.props.cartTotals.total) {
              totalAmount = (
                  <div className="cart-total">Total: {this.props.cartTotals.total.amount} {this.props.cartTotals.total.currency}</div>
@@ -64,6 +89,22 @@ export class Cart extends React.Component {
                 <div className="cart-total">Cart empty!</div>
             )
         }
+        if (this.state.discount) {
+
+            if(this.state.discount == "earplugs") {
+                console.log("EARPLUGS");
+                discount = (
+                    <p>Free Earplugs with 2x Ipads</p>
+                )
+            }
+            if(this.state.discount == "twin") {
+                discount = (
+                    <p id="twin-discount">DISCOUNT: Turntable Twin Pack</p>
+                )
+            }
+
+        }
+
         return (
             <div className="cart">
                 <div className="cart-header">
@@ -79,6 +120,7 @@ export class Cart extends React.Component {
                     </div>
                     <div className="cart-summary">
                         <h2>SUMMARY</h2>
+                        {discount}
                         {totalAmount}
                         <div className="checkout-button-container">
                             <button className="checkout-button">Checkout</button>

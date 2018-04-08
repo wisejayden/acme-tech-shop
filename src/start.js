@@ -17,7 +17,7 @@ export class App extends React.Component {
             cartTotals: {},
             title: '/images/acme-rocket.png',
             errorMessages: {
-                missing: '/images/404error.png',
+                missing: '/images/404error.png'
 
             }
         };
@@ -79,9 +79,9 @@ export class App extends React.Component {
                         </div></Link>
 
                         <div className="links">
-                            <Link to="/catalog"><button className="catalog-button" type="button" onClick={this.catalogClick}>Catalog</button></Link>
-                            <Link to="/trending"><button className="catalog-button" type="button" onClick={this.catalogClick}>Trending</button></Link>
-                            <Link to="/top100"><button className="catalog-button" type="button" onClick={this.catalogClick}>Top 100</button></Link>
+                            <Link to="/catalog"><button className="header-links" type="button" onClick={this.catalogClick}>Catalog</button></Link>
+                            <Link to="/trending"><button className="header-links" type="button" onClick={this.catalogClick}>Trending</button></Link>
+                            <Link to="/top100"><button className="header-links" type="button" onClick={this.catalogClick}>Top 100</button></Link>
 
                         </div>
                     </div>

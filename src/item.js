@@ -14,11 +14,9 @@ export class Item extends React.Component {
     }
     componentDidMount() {
         //Make an API request for item details by SKU
-        console.log("log props info", this.props.match.params);
         axios.get(' http://challenge.monoqi.net/article/' + this.props.match.params.sku)
             .then((res) => {
                 let item = res.data
-                console.log("Log item info", item);
                 item.description = item.description.replace(/<(?:.|\n)*?>/gm, '');
                 this.setState({
                     item
@@ -26,7 +24,6 @@ export class Item extends React.Component {
             })
             .catch((err) => {
                 console.log("CATCH ERROR", this.props.errorMessages.missing);
-                // console.log();
                 this.setState({
                     errorMessage: this.props.errorMessages.missing
                 })
@@ -63,7 +60,7 @@ export class Item extends React.Component {
                     <h2>Error 404</h2>
                     <img className ="error-missing" src={this.state.errorMessage} alt="error 404"/>
 
-                    <p>At appears this product has vanished. We're on the hunt now so please try again later.</p>
+                    <p>At appears this product has vanished. We're hunting for it now so please try again later.</p>
                 </div>
             )
         }
