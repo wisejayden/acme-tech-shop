@@ -15,7 +15,11 @@ export class App extends React.Component {
         this.state= {
             cartItemsNumber: 0,
             cartTotals: {},
-            title: '/images/acme-rocket.png'
+            title: '/images/acme-rocket.png',
+            errorMessages: {
+                missing: '/images/404error.png',
+
+            }
         };
         this.updateCart = this.updateCart.bind(this);
         this.updateCartNumber = this.updateCartNumber.bind(this);
@@ -113,6 +117,7 @@ export class App extends React.Component {
                             match = {props.match}
                             history = {props.history}
                             updateCart = {this.updateCart}
+                            errorMessages = {this.state.errorMessages}
                         />
                     )}
                 />
