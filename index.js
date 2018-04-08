@@ -5,7 +5,7 @@ const compression = require('compression');
 app.use(compression());
 app.use(express.static(__dirname + '/public'));
 
-//
+
 // if (process.env.NODE_ENV != 'production') {
 //     app.use(
 //         '/bundle.js',
@@ -14,8 +14,9 @@ app.use(express.static(__dirname + '/public'));
 //         })
 //     );
 // } else {
-//     app.use('/bundle.js', (req, res) => res.sendFile(__dirname + '/bundle.js`));
+//     app.use('/bundle.js', (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 // }
+app.use('/bundle.js', (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 
 app.get('*', function(req, res) {
     res.sendFile(__dirname + '/index.html');
