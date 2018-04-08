@@ -23,7 +23,7 @@ export class Item extends React.Component {
                 })
             })
             .catch((err) => {
-                console.log("CATCH ERROR", this.props.errorMessages.missing);
+                //In case of error from server, provide error message.
                 this.setState({
                     errorMessage: this.props.errorMessages.missing
                 })
@@ -60,7 +60,7 @@ export class Item extends React.Component {
                     <h2>Error 404</h2>
                     <img className ="error-missing" src={this.state.errorMessage} alt="error 404"/>
 
-                    <p>At appears this product has vanished. We're hunting for it now so please try again later.</p>
+                    <p>It appears this product has vanished. We're hunting for it now so please try again later.</p>
                 </div>
             )
         }
