@@ -23,6 +23,7 @@ export class App extends React.Component {
         };
         this.updateCart = this.updateCart.bind(this);
         this.updateCartNumber = this.updateCartNumber.bind(this);
+        this.changeCart = this.changeCart.bind(this);
     }
     updateCartNumber(totalCart) {
         //Loop through returned total, adding every quantity to calculate total number of items in cart
@@ -36,6 +37,7 @@ export class App extends React.Component {
     }
     updateCart(newItem) {
         //When updating cart, send a request for a new quote
+        console.log("CART BEFORE IT GETS A QUOTE", newItem);
         let cart = this.state.cart;
         cart.lines.push(newItem);
         this.updateCartNumber(cart);
@@ -52,6 +54,23 @@ export class App extends React.Component {
                 console.log("Put request error");
             })
     }
+    changeCart(cart) {
+        console.log("CHANGE CART FUNCTION", cart);
+        this.updateCartNumber(cart);
+        this.setState({
+            cart
+        })
+        axios.put('http://challenge.monoqi.net/cart', cart)
+            .then((res) => {
+                this.setState({
+                    cartTotals: res.data
+                })
+            })
+            .catch((err) => {
+                console.log("Put request error");
+            })
+    }
+    
     componentDidMount(){
         //Receive an empty cart on mount
         axios.get('http://challenge.monoqi.net/cart')
@@ -107,6 +126,9 @@ export class App extends React.Component {
                         <Cart
                             cartTotals = {this.state.cartTotals}
                             cartItemsNumber = {this.state.cartItemsNumber}
+                            cart = {this.state.cart}
+                            updateCart = {this.updateCart}
+                            changeCart = {this.changeCart}
                         />
                     )}
                 />

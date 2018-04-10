@@ -14,26 +14,40 @@ export class Cart extends React.Component {
             quantities: []
         };
         this.minusOne = this.minusOne.bind(this);
+        this.plusOne = this.plusOne.bind(this);
+        this.removeItem = this.removeItem.bind(this);
     }
     minusOne(i) {
         var self = this;
         return function() {
-            let quantities = self.state.quantities;
-
-            if (quantities[i] > 1) {
-                quantities[i] --;
+            let cart = self.props.cart;
+            if(cart.lines[i].quantity > 1 ) {
+                cart.lines[i].quantity --;
+                console.log("After updating cart", cart);
+                self.props.changeCart(cart);
             }
-            console.log("Minus one function", quantities[i]);
-            self.setState({
-                quantities
-            })
-            console.log("minus function after setState", self.state.quantities);
         }
     }
 
+    plusOne(i) {
+        var self = this;
+        return function() {
+            let cart = self.props.cart;
+            console.log("i", i);
+            console.log("BEfore updating cart", cart);
+            cart.lines[i].quantity ++;
+            console.log("After updating cart", cart);
+            self.props.changeCart(cart);
+        }
+    }
+    removeItem(item) {
+        let cart = this.props.cart;
+        let newCart = cart.lines.filter((i) =>  console.log("Inside filter", i, item));
+        console.log(newCart);
 
+        // var difficult_tasks = tasks.filter((task) => task.duration >= 120 );
 
-
+    }
     componentDidMount() {
         let cart = this.props.cartTotals;
         this.setState({
@@ -59,8 +73,7 @@ export class Cart extends React.Component {
                         return el.sku != 999999;
                     })
                 }
-                // quantities.push(cart.lines[i].quantity);
-                // console.log("CART LINEs", cart.lines[i]);
+
                 if(cart.lines[i]) {
                     quantities.push(cart.lines[i].quantity);
 
@@ -69,7 +82,13 @@ export class Cart extends React.Component {
             this.setState({
                 quantities
             })
-            //Send Get requests to get information of all remaining items in cart then render.
+        }
+    }
+
+    render() {
+        // Send Get requests to get information of all remaining items in cart then render.
+        if (this.props.cartTotals.lines) {
+            let cart = this.props.cartTotals;
             Promise.all(
                 cart.lines.map(
                     (cart, i) => axios.get('http://challenge.monoqi.net/article/' + cart.sku)
@@ -86,20 +105,23 @@ export class Cart extends React.Component {
                             </div>
                             <div className="cart-item-quantity">
                                 <button onClick={this.minusOne(i)} name="minus">-</button>
-                                <p className="cart-current-quantity">{this.state.quantities[i]}</p>
-                                <button name="plus">+</button>
+                                <p className="cart-current-quantity">{this.props.cartTotals.lines[i].quantity}</p>
+                                <button onClick={this.plusOne(i)} name="plus">+</button>
+                                <button onClick={this.removeItem} className="remove-item" name="remove">Remove</button>
                             </div>
 
                         </div>
                     )
                 })
-                this.setState({
-                    allCartItems
-                })
+                if(this.state.allCartItems != allCartItems) {
+                    this.setState({
+                        allCartItems
+                    })
+                }
             })
         }
-    }
-    render() {
+
+
         let totalAmount;
         let discount;
         if(this.props.cartTotals.total) {
