@@ -10,9 +10,29 @@ export class Cart extends React.Component {
         super(props);
         this.state={
             message: "Hello",
-            discount: ''
+            discount: '',
+            quantities: []
         };
+        this.minusOne = this.minusOne.bind(this);
     }
+    minusOne(i) {
+        var self = this;
+        return function() {
+            let quantities = self.state.quantities;
+
+            if (quantities[i] > 1) {
+                quantities[i] --;
+            }
+            console.log("Minus one function", quantities[i]);
+            self.setState({
+                quantities
+            })
+            console.log("minus function after setState", self.state.quantities);
+        }
+    }
+
+
+
 
     componentDidMount() {
         let cart = this.props.cartTotals;
@@ -21,6 +41,7 @@ export class Cart extends React.Component {
         });
         if(cart.lines) {
             let cartTotal = [];
+            let quantities = [];
             for (var i = 0; i < cart.lines.length; i++) {
                 if (cart.lines[i].sku == 332119) {
                     //Filter out discounts
@@ -38,7 +59,16 @@ export class Cart extends React.Component {
                         return el.sku != 999999;
                     })
                 }
+                // quantities.push(cart.lines[i].quantity);
+                // console.log("CART LINEs", cart.lines[i]);
+                if(cart.lines[i]) {
+                    quantities.push(cart.lines[i].quantity);
+
+                }
             }
+            this.setState({
+                quantities
+            })
             //Send Get requests to get information of all remaining items in cart then render.
             Promise.all(
                 cart.lines.map(
@@ -55,8 +85,8 @@ export class Cart extends React.Component {
                                 <p>{data.price.amount} {data.price.currency}</p>
                             </div>
                             <div className="cart-item-quantity">
-                                <button  name="minus">-</button>
-                                <p className="cart-current-quantity">{cart.lines[i].quantity}</p>
+                                <button onClick={this.minusOne(i)} name="minus">-</button>
+                                <p className="cart-current-quantity">{this.state.quantities[i]}</p>
                                 <button name="plus">+</button>
                             </div>
 

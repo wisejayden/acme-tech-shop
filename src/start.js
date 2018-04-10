@@ -75,7 +75,7 @@ export class App extends React.Component {
                         </div>
                         <Link to="/cart"><div className="cart-button">
                             <img alt="shopping-cart" className="shopping-cart-image" src="./images/shopping-cart.svg" />
-                            <p id="">({this.state.cartItemsNumber})</p>
+                            <p id="cart-image">({this.state.cartItemsNumber})</p>
                         </div></Link>
 
                         <div className="links">

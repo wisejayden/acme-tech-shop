@@ -12,10 +12,12 @@
 
 
 
-# Usage
+# Run Locally
 
 ```
 npm install
+node bundle-server.js
+node index.js
 ```
 # Testing
 
