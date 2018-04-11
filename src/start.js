@@ -60,17 +60,32 @@ export class App extends React.Component {
         this.setState({
             cart
         })
-        axios.put('http://challenge.monoqi.net/cart', cart)
-            .then((res) => {
-                this.setState({
-                    cartTotals: res.data
+        if(cart.lines.length === 0) {
+            console.log("update cart GET");
+            axios.get('http://challenge.monoqi.net/cart')
+                .then((res) => {
+                    let cart = res.data;
+                    this.setState({
+                        cart: cart,
+                        cartTotals: {}
+                    })
                 })
-            })
-            .catch((err) => {
-                console.log("Put request error");
-            })
+        } else {
+            console.log("update cart PUT");
+
+            axios.put('http://challenge.monoqi.net/cart', cart)
+                .then((res) => {
+                    this.setState({
+                        cartTotals: res.data
+                    })
+                })
+                .catch((err) => {
+                    console.log("Put request error");
+                })
+        }
+
     }
-    
+
     componentDidMount(){
         //Receive an empty cart on mount
         axios.get('http://challenge.monoqi.net/cart')
