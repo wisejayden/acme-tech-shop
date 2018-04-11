@@ -21,21 +21,14 @@ export class Cart extends React.Component {
         var self = this;
         return function() {
             let cart = self.props.cart;
-            console.log("minus one cart", cart);
             let currentSku = cart.lines[i].sku;
-            console.log("currentSku", currentSku);
             for (var s = 0; s < cart.lines.length; s++) {
                 if (cart.lines[s].sku === currentSku && cart.lines[s].quantity > 1) {
-                    console.log("for loop quantity before", cart.lines[s].quantity);
                     cart.lines[s].quantity --;
-                    console.log("for loop quantity after", cart.lines[s].quantity);
+                    self.props.changeCart(cart);
+                    break;
                 }
             }
-            // if(cart.lines[i].quantity > 1 ) {
-            //     cart.lines[i].quantity --;
-                console.log("After updating cart", cart);
-                self.props.changeCart(cart);
-            // }
         }
     }
 
@@ -43,12 +36,7 @@ export class Cart extends React.Component {
         var self = this;
         return function() {
             let cart = self.props.cart;
-            console.log("Cart in plus one item", cart);
-
-            console.log("i", i);
-            console.log("BEfore updating cart", cart);
             cart.lines[i].quantity ++;
-            console.log("After updating cart", cart);
             self.props.changeCart(cart);
         }
     }
@@ -56,16 +44,11 @@ export class Cart extends React.Component {
         var self= this;
         return function() {
             let cart = self.props.cart;
-            console.log("Cart in remove item", cart);
             let currentItemSku = self.props.cartTotals.lines[item].sku;
-            //
             let key = "lines";
             let newCart = {};
-
             newCart[key] = cart.lines.filter((el) =>  el.sku != currentItemSku);
-            console.log("newCart", newCart);
             self.props.changeCart(newCart);
-            // var difficult_tasks = tasks.filter((task) => task.duration >= 120 );
         }
     }
     componentDidMount() {
@@ -144,7 +127,6 @@ export class Cart extends React.Component {
 
         let totalAmount;
         let discount;
-        console.log("CART TOTALS for the cart", this.props.cartTotals);
         if(this.props.cartTotals.total) {
              totalAmount = (
                  <div className="cart-total">Total: {this.props.cartTotals.total.amount} {this.props.cartTotals.total.currency}</div>

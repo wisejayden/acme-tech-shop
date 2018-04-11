@@ -37,7 +37,6 @@ export class App extends React.Component {
     }
     updateCart(newItem) {
         //When updating cart, send a request for a new quote
-        console.log("CART BEFORE IT GETS A QUOTE", newItem);
         let cart = this.state.cart;
         cart.lines.push(newItem);
         this.updateCartNumber(cart);
@@ -55,13 +54,11 @@ export class App extends React.Component {
             })
     }
     changeCart(cart) {
-        console.log("CHANGE CART FUNCTION", cart);
         this.updateCartNumber(cart);
         this.setState({
             cart
         })
         if(cart.lines.length === 0) {
-            console.log("update cart GET");
             axios.get('http://challenge.monoqi.net/cart')
                 .then((res) => {
                     let cart = res.data;
@@ -71,8 +68,6 @@ export class App extends React.Component {
                     })
                 })
         } else {
-            console.log("update cart PUT");
-
             axios.put('http://challenge.monoqi.net/cart', cart)
                 .then((res) => {
                     this.setState({
