@@ -22,6 +22,7 @@ export class Cart extends React.Component {
         return function() {
             let cart = self.props.cart;
             let currentSku = cart.lines[i].sku;
+            //On click, Loop through cart, where object has the same SKU code and has a quantity more then 1, minus 1 from the quantity and then update cart.
             for (var s = 0; s < cart.lines.length; s++) {
                 if (cart.lines[s].sku === currentSku && cart.lines[s].quantity > 1) {
                     cart.lines[s].quantity --;
@@ -47,6 +48,7 @@ export class Cart extends React.Component {
             let currentItemSku = self.props.cartTotals.lines[item].sku;
             let key = "lines";
             let newCart = {};
+            //Create new object without the deleted object then update cart
             newCart[key] = cart.lines.filter((el) =>  el.sku != currentItemSku);
             self.props.changeCart(newCart);
         }
@@ -60,8 +62,8 @@ export class Cart extends React.Component {
             let cartTotal = [];
             let quantities = [];
             for (var i = 0; i < cart.lines.length; i++) {
+                //Filter out discounts
                 if (cart.lines[i].sku == 332119) {
-                    //Filter out discounts
                     this.setState ({
                         discount: "earplugs"
                     })
@@ -97,6 +99,7 @@ export class Cart extends React.Component {
                     (cart, i) => axios.get('http://challenge.monoqi.net/article/' + cart.sku)
                 )
             ).then(res => {
+                //Dynamically add items on page.
                 const allCartItems = res.map((res, i) => {
                     const data = res.data;
                     return(
@@ -116,6 +119,7 @@ export class Cart extends React.Component {
                         </div>
                     )
                 })
+                //Only setState if allCartItems has been updated.
                 if(this.state.allCartItems != allCartItems) {
                     this.setState({
                         allCartItems
@@ -127,6 +131,7 @@ export class Cart extends React.Component {
 
         let totalAmount;
         let discount;
+        //Display total costs and discounts (if there are any!)
         if(this.props.cartTotals.total) {
              totalAmount = (
                  <div className="cart-total">Total: {this.props.cartTotals.total.amount} {this.props.cartTotals.total.currency}</div>

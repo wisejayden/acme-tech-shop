@@ -36,7 +36,7 @@ export class App extends React.Component {
         })
     }
     updateCart(newItem) {
-        //When updating cart, send a request for a new quote
+        //When updating cart, send a request for a new quote. updateCart adds an object to the current cart and then updates.
         let cart = this.state.cart;
         cart.lines.push(newItem);
         this.updateCartNumber(cart);
@@ -54,10 +54,12 @@ export class App extends React.Component {
             })
     }
     changeCart(cart) {
+        //changeCart takes a whole new cart and then updates.
         this.updateCartNumber(cart);
         this.setState({
             cart
         })
+        //If cart is empty (item deleted), retrieve an empty cart from the server.
         if(cart.lines.length === 0) {
             axios.get('http://challenge.monoqi.net/cart')
                 .then((res) => {
@@ -67,6 +69,7 @@ export class App extends React.Component {
                         cartTotals: {}
                     })
                 })
+        //If cart is not empty, retrieve quote.
         } else {
             axios.put('http://challenge.monoqi.net/cart', cart)
                 .then((res) => {
