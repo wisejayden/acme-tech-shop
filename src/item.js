@@ -5,7 +5,9 @@ export class Item extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
-            numberOfItemsToAdd: 1
+            numberOfItemsToAdd: 1,
+            monoqiAPI: 'http://challenge.monoqi.net/article/',
+            mockAPI: '/article/api/'
         };
         this.addOne = this.addOne.bind(this);
         this.minusOne = this.minusOne.bind(this);
@@ -14,9 +16,10 @@ export class Item extends React.Component {
     }
     componentDidMount() {
         //Make an API request for item details by SKU
-        axios.get(' http://challenge.monoqi.net/article/' + this.props.match.params.sku)
+        axios.get(this.state.mockAPI + this.props.match.params.sku)
             .then((res) => {
                 let item = res.data
+                console.log("item image", item.image);
                 item.description = item.description.replace(/<(?:.|\n)*?>/gm, '');
                 this.setState({
                     item

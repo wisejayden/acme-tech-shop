@@ -19,7 +19,9 @@ export class App extends React.Component {
             errorMessages: {
                 missing: '/images/404error.png'
 
-            }
+            },
+            monoqiAPI_cart: 'http://challenge.monoqi.net/cart',
+            mockAPI_cart: '/cart/api'
         };
         this.updateCart = this.updateCart.bind(this);
         this.updateCartNumber = this.updateCartNumber.bind(this);
@@ -43,7 +45,7 @@ export class App extends React.Component {
         this.setState({
             cart
         })
-        axios.put('http://challenge.monoqi.net/cart', cart)
+        axios.put(this.state.mockAPI_cart, cart)
             .then((res) => {
                 this.setState({
                     cartTotals: res.data
@@ -61,7 +63,7 @@ export class App extends React.Component {
         })
         //If cart is empty (item deleted), retrieve an empty cart from the server.
         if(cart.lines.length === 0) {
-            axios.get('http://challenge.monoqi.net/cart')
+            axios.get(this.state.mockAPI_cart)
                 .then((res) => {
                     let cart = res.data;
                     this.setState({
@@ -71,7 +73,7 @@ export class App extends React.Component {
                 })
         //If cart is not empty, retrieve quote.
         } else {
-            axios.put('http://challenge.monoqi.net/cart', cart)
+            axios.put(this.state.mockAPI_cart, cart)
                 .then((res) => {
                     this.setState({
                         cartTotals: res.data
@@ -85,13 +87,18 @@ export class App extends React.Component {
     }
 
     componentDidMount(){
+        console.log("Hello app");
         //Receive an empty cart on mount
-        axios.get('http://challenge.monoqi.net/cart')
+        axios.get(this.state.mockAPI_cart)
             .then((res) => {
+                console.log("cart data", res.data);
                 let cart = res.data;
                 this.setState({
                     cart
                 })
+            })
+            .catch(err => {
+                console.log("ERROR", err);
             })
     }
     render() {

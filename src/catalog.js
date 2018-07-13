@@ -7,13 +7,18 @@ import {Link} from 'react-router-dom';
 export class Catalog extends React.Component {
     constructor(props) {
         super(props);
-        this.state= {};
+        this.state= {
+            monoqiAPI: 'http://challenge.monoqi.net/catalog',
+            mockAPI: '/catalog/api'
+        };
     }
     componentDidMount() {
         //On mount, retrieve entire catalog from server and then dynamically add to the DOM
-        axios.get('http://challenge.monoqi.net/catalog')
+        axios.get(this.state.mockAPI)
             .then((res) => {
                 var articles = res.data.articles;
+                console.log("articles", articles);
+                console.log("resdata", res.data);
                 let allArticles = [];
                 for (var i = 0; i < articles.length; i++) {
                     var sku = articles[i].sku;
@@ -32,7 +37,11 @@ export class Catalog extends React.Component {
                     allArticles
                 })
             })
+            .catch(err => {
+                console.log("err", err);
+            })
     }
+
     render() {
         return(
             <div className="catalog">
